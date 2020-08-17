@@ -26,7 +26,7 @@ I have created a simple wireframe to capture the design layout of this game on t
 
 ## Architecture & Technology
 
-This project will heavily rely on web APIs and DOM manipulation. Depending on whether I decide to add animations and other effects to the game, other technologies may be added.
+This project will heavily rely on web APIs and DOM manipulation, using JavaScript, HTML5 and CSS3. Depending on whether I decide to add animations and other effects to the game, other technologies may be added.
 
 ## Implementation Timeline
 
