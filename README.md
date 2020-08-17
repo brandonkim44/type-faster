@@ -22,6 +22,7 @@ Bonus:
 
 I have created a simple wireframe to capture the design layout of this game on the browser:
 
+![Alt text](readme_wireframe/wireframe.jpeg)
 
 ## Architecture & Technology
 
