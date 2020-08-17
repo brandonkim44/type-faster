@@ -33,14 +33,18 @@ This project will heavily rely on web APIs and DOM manipulation. Depending on wh
 Day 1: Text authentication
   - Have text appear on the page
   - Respond to user input (changing colors depending on if the user types correctly or incorrectly)
+  
 Day 2: Scrolling Text
   - Have text appear on the page, scrolling from top to bottom
-  - As soon as the top-most line hits the top of the viewport, an alert pops up that the user has lost/the game is over. 
+  - As soon as the top-most line hits the top of the viewport, an alert pops up that the user has lost/the game is over.
+  
  Day 3: Incorporate more game logic
   - Implement easy, medium, difficult speed options for user to select
   - wpm calculator to display aggregate wpm at loss of game
+  
  Day 4: Styling
   - Prettify the layout of the game
+  
  Day 5: Testing for bugs
   - Take time to debug any issues and look for edge cases
   - Work on more logic, styling, and other issues that arise
