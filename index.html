@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./dist/main.css" />
-    <title>Document</title>
-</head>
-
-<body>
-    <script src="./dist/main.js"></script>
-</body>
-
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="./dist/main.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap" rel="stylesheet">
+        <title>Type-faster</title>
+        <script src="./dist/main.js"></script>
+    </head>
+    <body class="body">
+        <div class="modal-bg">
+            <div class="modal-container">
+                <h1>Instructions</h1>
+                <p>
+                    Lines of text will appear at the bottom of the page
+                    and move up towards the top of the page. You must type
+                    the top-most line completely before it reaches the top
+                    of the page, or else, you lose.
+                    Be careful, as the longer you play, the faster the lines move!
+                </p>
+                <span class="start-button">Start</span>
+            </div>
+        </div>
+        <div id="current" class="incorrect"></div>
+    </body>
+    <div class="splash-bg">
+        <object class="splash-img" data="src/images/loading.gif"></object>
+    </div>
 </html>
