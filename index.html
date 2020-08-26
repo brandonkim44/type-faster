@@ -11,20 +11,39 @@
         <script src="./dist/main.js"></script>
     </head>
     <body class="body">
-        <div class="modal-bg">
+        <div class="start-modal">
             <div class="modal-container">
-                <h1>Instructions</h1>
+                <h1 class="instructions-header">Instructions</h1>
                 <p>
                     Lines of text will appear at the bottom of the page
-                    and move up towards the top of the page. You must type
-                    the top-most line completely before it reaches the top
-                    of the page, or else, you lose.
-                    Be careful, as the longer you play, the faster the lines move!
+                    and move up towards the top of the page. Type the words out
+                    before they hit the top, or you lose.
+                    Be careful...The longer you play, the faster the lines move!
                 </p>
+                <br>
+                <p>Please select your starting speed:</p>
+                <br>
+                <span class="speed slow" data-speed="0">Slow</span>
+                <br>
+                <span class="speed medium" data-speed="5">Medium</span>
+                <br>
+                <span class="speed fast" data-speed="10">Fast</span>
+                <br>
                 <span class="start-button">Start</span>
             </div>
         </div>
+        <div class="end-modal">
+            <div class="modal-container">
+                <h1 class="instructions-header">You lost :(</h1>
+                <p>
+                    Try again!
+                </p>
+                <br>
+                <span class="play-again-button">Play Again</span>
+            </div>
+        </div>
         <div id="current" class="incorrect"></div>
+        <div id="timer" class="timer">00:00:00</div>
     </body>
     <div class="splash-bg">
         <object class="splash-img" data="src/images/loading.gif"></object>

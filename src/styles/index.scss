@@ -108,7 +108,7 @@ $arvo: 'Arvo', serif;
 
 /* Modal */
 
-.modal-bg {
+.start-modal {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -130,9 +130,60 @@ $arvo: 'Arvo', serif;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 400px;
+    display: flex;
+    flex-direction: column;;
+}
+
+.instructions-header {
+    margin-bottom: 10px;
 }
 
 .start-button {
+    padding: 5px;
     border: 1px solid white;
     cursor: pointer;
+    text-align: center;
+}
+
+.start-button:hover {
+    background-color: white;
+    color: #3d6eff;
+}
+
+.play-again-button {
+    padding: 5px;
+    border: 1px solid white;
+    cursor: pointer;
+    text-align: center;
+}
+
+.play-again-button:hover {
+    background-color: white;
+    color: #3d6eff;
+}
+
+.end-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 23, 95, 0.7);
+    z-index: 2;
+    max-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: $arvo;
+    color: white;
+    display: none;
+}
+
+.speed {
+    border: 1px solid white;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+    width: 100px;
+    margin: 0 auto;
 }
