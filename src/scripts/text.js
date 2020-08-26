@@ -60,7 +60,7 @@ class Text {
 
     moveDiv(speed) {
         let pos = -2020;
-        const id = setInterval(frame, 45);
+        const id = setInterval(frame, 40 - speed);
         this.id = id;
         const that = this;
         function frame() {
@@ -80,11 +80,15 @@ class Text {
 
     listenForLose() {
         const body = document.querySelector('body');
-        const firstIncorrectSpan = document.getElementsByClassName('incorrect')[0];
+        const firstIncorrectSpan = document.getElementsByClassName('incorrect')[1];
 
         const bodyRect = body.getBoundingClientRect();
         const firstIncorrectSpanRect = firstIncorrectSpan.getBoundingClientRect();
-
+        
+        window.firstIncorrectSpanRect = firstIncorrectSpanRect;
+        window.bodyRect = bodyRect;
+    
+        debugger;
         if (bodyRect.top >= firstIncorrectSpanRect.top + 15) {
             this.stopDiv();
             const end = document.querySelector('.end-modal')

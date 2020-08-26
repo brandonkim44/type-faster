@@ -1,3 +1,4 @@
+import { timer } from './timer';
 
 export default class Modal {
     constructor(text) {
@@ -6,10 +7,10 @@ export default class Modal {
         this.playAgainModal = this.playAgainModal.bind(this);
         this.startGame = this.startGame.bind(this);
         this.selectSpeed = this.selectSpeed.bind(this);
+        this.selectedSlow = this.selectedSlow.bind(this);
         this.selectSpeed();
         this.playAgainModal();
-        // this.speed = null;
-        this.startGame(this.speed);
+        this.speed = null;
     }
 
     selectSpeed() {
@@ -26,7 +27,7 @@ export default class Modal {
             fast.style.backgroundColor = 'unset';
             fast.style.color = 'white';
             debugger;
-            that.speed = parseInt(slow.dataset.speed);
+            that.selectedSlow();
             // debugger;
         })
         medium.addEventListener('click', () => {
@@ -52,15 +53,23 @@ export default class Modal {
         // this.startGame(speed);
     }
 
+    selectedSlow() {
+        const slow = document.querySelector('.speed.slow');
+        debugger;
+        this.speed = parseInt(slow.dataset.speed);
+        this.startGame(this.speed);
+    }
+
     startGame(speed = this.speed) {
         const start = document.querySelector('.start-button');
         start.addEventListener('click', (e) => {
             e.preventDefault();
-            // debugger;
-            // if (speed) {
+            debugger;
+            if (speed) {
                 this.modal.style.display = 'none';
                 this.text.moveDiv(speed);
-            // }
+            }
+            timer();
         });
     }
 
