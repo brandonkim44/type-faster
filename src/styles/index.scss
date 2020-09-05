@@ -86,12 +86,12 @@ $arvo: 'Arvo', serif;
 #current {
     font-size: 25px;
     font-family: $arvo;
-    width: 500px;
+    width: 700px;
     left: 50%;
     line-height: 2;
     position: absolute;
     transform: translate(-50%, -50%);
-    bottom: -2020px;
+    bottom: -7700px;
 }
 
 .correct {
@@ -100,9 +100,19 @@ $arvo: 'Arvo', serif;
     color: rgb(98, 177, 98);
 }
 
+.untyped {
+    font-size: 25px;
+    font-family: $arvo;
+}
+
 .incorrect {
     font-size: 25px;
     font-family: $arvo;
+    color: red;
+}
+
+.loading-text {
+  display: none;
 }
 
 

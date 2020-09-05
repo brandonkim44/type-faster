@@ -1,23 +1,22 @@
-import { timer } from './timer';
+import Game from './game';
 
 export default class Modal {
     constructor(text) {
-        this.modal = document.querySelector('.start-modal');
+        // this.modal = document.querySelector('.start-modal');
         this.text = text;
         this.playAgainModal = this.playAgainModal.bind(this);
-        this.startGame = this.startGame.bind(this);
         this.selectSpeed = this.selectSpeed.bind(this);
-        this.selectedSlow = this.selectedSlow.bind(this);
-        this.selectSpeed();
+        // this.selectedSlow = this.selectedSlow.bind(this);
         this.playAgainModal();
-        this.speed = null;
+        this.selectSpeed();
     }
-
+    
     selectSpeed() {
-        //see if i can use hover instead and pass in the class, so the code can be more DRY
+        //note to self: see if i can use hover instead and pass in the class, so the code can be more DRY
         const slow = document.querySelector('.speed.slow');
         const medium = document.querySelector('.speed.medium');
         const fast = document.querySelector('.speed.fast');
+        const startButton = document.querySelector('.start-button');
         let that = this;
         slow.addEventListener('click', () => {
             slow.style.backgroundColor = 'white';
@@ -26,9 +25,12 @@ export default class Modal {
             medium.style.color = 'white';
             fast.style.backgroundColor = 'unset';
             fast.style.color = 'white';
+            // Solution Attempt 1:
+            const slowSpeed = slow.dataset.speed;
             debugger;
-            that.selectedSlow();
-            // debugger;
+            startButton.dataset.speed = slowSpeed;
+            // Solution Attempt 2:
+            // this.selectedSlow();
         })
         medium.addEventListener('click', () => {
             medium.style.backgroundColor = 'white';
@@ -37,7 +39,9 @@ export default class Modal {
             slow.style.color = 'white';
             fast.style.backgroundColor = 'unset';
             fast.style.color = 'white';
-            that.speed = parseInt(medium.dataset.speed);
+            const mediumSpeed = medium.dataset.speed;
+            startButton.dataset.speed = mediumSpeed;
+
             // debugger;
         })
         fast.addEventListener('click', () => {
@@ -47,31 +51,17 @@ export default class Modal {
             slow.style.color = 'white';
             medium.style.backgroundColor = 'unset';
             medium.style.color = 'white';
-            that.speed = parseInt(fast.dataset.speed);
+            const fastSpeed = medium.dataset.speed;
+            startButton.dataset.speed = fastSpeed;
         })
-        // debugger;
-        // this.startGame(speed);
     }
 
-    selectedSlow() {
-        const slow = document.querySelector('.speed.slow');
-        debugger;
-        this.speed = parseInt(slow.dataset.speed);
-        this.startGame(this.speed);
-    }
-
-    startGame(speed = this.speed) {
-        const start = document.querySelector('.start-button');
-        start.addEventListener('click', (e) => {
-            e.preventDefault();
-            debugger;
-            if (speed) {
-                this.modal.style.display = 'none';
-                this.text.moveDiv(speed);
-            }
-            timer();
-        });
-    }
+    // selectedSlow() {
+    //     const slow = document.querySelector('.speed.slow');
+    //     debugger;
+    //     this.speed = parseInt(slow.dataset.speed);
+    //     this.startGame(this.speed);
+    // }
 
     playAgainModal(speed = this.speed) {
         const playAgain = document.querySelector('.play-again-button');
