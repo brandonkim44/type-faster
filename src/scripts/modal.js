@@ -1,13 +1,14 @@
 import Game from './game';
+import loadText from './utils';
 
 export default class Modal {
-    constructor(text) {
+    constructor() {
         // this.modal = document.querySelector('.start-modal');
-        this.text = text;
-        this.playAgainModal = this.playAgainModal.bind(this);
+        // this.text = text;
+        // this.playAgainModal = this.playAgainModal.bind(this);
         this.selectSpeed = this.selectSpeed.bind(this);
         // this.selectedSlow = this.selectedSlow.bind(this);
-        this.playAgainModal();
+        // this.playAgainModal();
         this.selectSpeed();
     }
     
@@ -63,13 +64,13 @@ export default class Modal {
     //     this.startGame(this.speed);
     // }
 
-    playAgainModal(speed = this.speed) {
-        const playAgain = document.querySelector('.play-again-button');
-        const playAgainModal = document.querySelector('.end-modal');
-        playAgain.addEventListener('click', (e) => {
-            e.preventDefault();
-            playAgainModal.style.display = 'none';
-            this.text.moveDiv(speed)
-        });
-    }
+    // playAgainModal(speed = this.speed) {
+    //     const playAgain = document.querySelector('.play-again-button');
+    //     const playAgainModal = document.querySelector('.end-modal');
+    //     playAgain.addEventListener('click', (e) => {
+    //         e.preventDefault();
+    //         playAgainModal.style.display = 'none';
+    //         this.text.moveDiv(speed)
+    //     });
+    // }
 }

@@ -7,7 +7,7 @@ class Text {
         // debugger;
         this.id = null;
         debugger;
-        this.text = document.getElementById('text').textContent;
+        this.text = document.getElementById('current').textContent;
         debugger;
         this.chars = this.text.split("");
         this._currentDiv = this._currentDiv.bind(this);
@@ -47,6 +47,10 @@ class Text {
             const incorrectSpans = document.getElementsByClassName('incorrect');
             const lastCorrectElement = correctSpans.length - 1;
             const lastIncorrectElement = incorrectSpans.length - 1;
+
+            //currentCharacter = checkCharacter(currentCharacter);
+                //checkCharacter will be a case switch
+                // check for emdash, accent signs on e, a, i, o u, 
 
             if (e.key === currentCharacter || (e.key === "-" && currentCharacter === "—")) {
                 // currentCharacterSpan.remove();
