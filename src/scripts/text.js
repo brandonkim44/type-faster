@@ -1,13 +1,10 @@
 import { FAMOUS_TEXTS, content } from './utils';
 
 class Text {
-    constructor() {
-        this.currentDiv = document.getElementById('current');
-        //
-        // debugger;
+    constructor(responseText) {
         this.id = null;
         debugger;
-        this.text = document.getElementById('current').textContent;
+        this.text = responseText;
         debugger;
         this.chars = this.text.split("");
         this._currentDiv = this._currentDiv.bind(this);
@@ -25,18 +22,19 @@ class Text {
     }
 
     _currentDiv() {
+        const currentDiv = document.getElementById('current');
         this.charsSpans = this.chars.map(char => {
             const span = document.createElement('span');
             span.setAttribute('class', 'untyped');
             span.innerText = char;
-            this.currentDiv.appendChild(span);
+            currentDiv.appendChild(span);
             return span;
         });
     }
 
     checkWord() {
-        let currentIndex = 0;
-        let errorCount = 0;
+        let currentIndex = 0, correctCount = 0, uncorrectedErrorCount = 0, totalTypedCount = 0, accuracy = 0, netWPM = 0;
+        
         document.addEventListener('keydown', e => {
 
             e.preventDefault();
@@ -64,6 +62,8 @@ class Text {
                     // currentCharacterSpan.style.visibility = "hidden";
                 untypedSpans[1].style.borderRight = "1px solid black";
                 currentCharacterSpan.setAttribute('class', 'correct');
+                totalTypedCount++;
+                correctCount++;
                 currentIndex++;
             } else if (e.keyCode === 8) {
                 debugger;
@@ -89,10 +89,25 @@ class Text {
                 }
                 untypedSpans[1].style.borderRight = "1px solid black";
                 currentCharacterSpan.setAttribute('class', 'incorrect');
+                currentCharacterSpan.setAttribute('data-incorrect', 'true');
+                totalTypedCount++;
                 currentIndex++;
-                errorCount++;
                 debugger;
             }
+            //calculate accuracy
+            //error here vvv
+            debugger;
+            if (totalTypedCount !== 0) { accuracy = ((correctCount / totalTypedCount) * 100).toFixed(2);};
+            //calculateWPM
+            debugger;
+            let uncorrectedChars = document.querySelectorAll('[data-incorrect]');
+            if (uncorrectedChars) { uncorrectedErrorCount = document.querySelectorAll('[data-incorrect]').length; }
+            debugger;
+            //working correctly
+            let time = document.getElementById('timer').dataset.time;
+            netWPM = ((totalTypedCount / 5) - uncorrectedErrorCount) / parseInt(time);
+            debugger;
+            document.getElementById('wpm').innerText = netWPM.toString();
         })
     }
 
@@ -106,13 +121,13 @@ class Text {
         debugger;
         const id = setInterval(frame, 40 - speed);
         this.id = id;
-        const that = this;
         function frame() {
             // if (pos === 300) {
             //     clearInterval(id);
             // } else {
                 pos++;
-                this.currentDiv.style.bottom = pos + "px";
+                const currentDiv = document.getElementById('current');
+                currentDiv.style.bottom = pos + "px";
                 // that.listenForLose();
             // }
         }
@@ -140,12 +155,14 @@ class Text {
     //     }
     // }
 
+    
+
     // calcWPM(allWords, time) {
         // Words Per Minute(WPM) is the number of characters(including spaces and punctuation) typed in 1 minute, divided by 5.
 
         // const grossWPM = allWords / time;
         // const errorRate = 
-        // const netWPM = grossWPM - 
+        // const netWPM = [(allTypedEntries/5) - uncorrectedErrors]/time(min)
     // }
 }
 

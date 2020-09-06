@@ -6,7 +6,7 @@ import Game from './scripts/game';
 
 document.addEventListener("DOMContentLoaded", () => {
     const modal = new Modal();
-    const game = new Game(modal);
+    const game = new Game();
     // const text = new Text();
     // text.currentDiv.style.bottom = -7700 + "px";
     
