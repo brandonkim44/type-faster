@@ -88,10 +88,11 @@ $arvo: 'Arvo', serif;
     font-family: $arvo;
     width: 700px;
     left: 50%;
+    height: 50px;
     line-height: 2;
-    position: absolute;
+    position: fixed;
     transform: translate(-50%, -50%);
-    bottom: -7700px;
+    bottom: 0%;
 }
 
 .correct {

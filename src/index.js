@@ -7,22 +7,8 @@ import Game from './scripts/game';
 document.addEventListener("DOMContentLoaded", () => {
     const modal = new Modal();
     const game = new Game();
-    // const text = new Text();
-    // text.currentDiv.style.bottom = -7700 + "px";
-    
-    // text.displayDiv();
-
     game.startGame();
-    // window.text = text;
-    // window.charsSpans = text.charsSpans;
-    // window.words = text.words;
-    // window.currentDiv = text.currentDiv;
-    // window.currentCharacterSpan = text.currentCharacterSpan;
     window.modal = modal;
-    window.speed = modal.speed;
-    // window.res = res;
-
-
     setTimeout(() => {
         document.querySelector(".splash-bg").setAttribute("class", "hidden-splash-bg");
     }, 1000);

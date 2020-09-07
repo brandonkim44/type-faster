@@ -62,6 +62,7 @@ class Text {
                     // currentCharacterSpan.style.visibility = "hidden";
                 untypedSpans[1].style.borderRight = "1px solid black";
                 currentCharacterSpan.setAttribute('class', 'correct');
+                if (currentCharacterSpan.dataset.incorrect) { currentCharacterSpan.removeAttribute('data-incorrect'); };
                 totalTypedCount++;
                 correctCount++;
                 currentIndex++;
@@ -95,17 +96,15 @@ class Text {
                 debugger;
             }
             //calculate accuracy
-            //error here vvv
-            debugger;
             if (totalTypedCount !== 0) { accuracy = ((correctCount / totalTypedCount) * 100).toFixed(2);};
+
             //calculateWPM
-            debugger;
             let uncorrectedChars = document.querySelectorAll('[data-incorrect]');
-            if (uncorrectedChars) { uncorrectedErrorCount = document.querySelectorAll('[data-incorrect]').length; }
-            debugger;
-            //working correctly
+            if (uncorrectedChars) { uncorrectedErrorCount = document.querySelectorAll('[data-incorrect]').length; };
             let time = document.getElementById('timer').dataset.time;
-            netWPM = ((totalTypedCount / 5) - uncorrectedErrorCount) / parseInt(time);
+            debugger;
+            netWPM = Math.round(((totalTypedCount / 5) - uncorrectedErrorCount) / parseFloat(time));
+            if (netWPM < 0) { netWPM = 0; };
             debugger;
             document.getElementById('wpm').innerText = netWPM.toString();
         })
@@ -117,7 +116,7 @@ class Text {
     }
 
     moveDiv(speed) {
-        let pos = -7700;
+        let pos = 0;
         debugger;
         const id = setInterval(frame, 40 - speed);
         this.id = id;
@@ -125,9 +124,9 @@ class Text {
             // if (pos === 300) {
             //     clearInterval(id);
             // } else {
-                pos++;
+                pos = pos + 0.10;
                 const currentDiv = document.getElementById('current');
-                currentDiv.style.bottom = pos + "px";
+                currentDiv.style.bottom = pos + "%";
                 // that.listenForLose();
             // }
         }

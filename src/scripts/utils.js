@@ -26,10 +26,16 @@ export function loadText(topic, modalDiv, selectedSpeed) {
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             
-            const res = xhttp.response;
-            const numOfArticles = JSON.parse(res).articles.length - 1;
+            const res = JSON.parse(xhttp.response);
+            const numOfArticles = res.articles.length - 1;
             const randomArticleNum = Math.floor((Math.random() * numOfArticles) + 1);
-            const contentURL = JSON.parse(res).articles[randomArticleNum].url;
+            const article = res.articles[randomArticleNum];
+            const contentURL = article.url;
+            const author = article.author;
+            const title = article.title;
+            document.querySelector('.author').innerText = author;
+            document.querySelector('.title').innerText = title;
+
             const reqURL = `https://extractorapi.com/api/v1/extractor/?apikey=${articleExtractorAPI_key}&url=${contentURL}`
 
             const xhttpContentReq = new XMLHttpRequest();
@@ -48,13 +54,14 @@ export function loadText(topic, modalDiv, selectedSpeed) {
                 } else if (this.status !== 200) {
                     alert('API Request failed. Please try again!');
                 }
+                if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); };
             } 
             xhttpContentReq.send();
         } else if (this.status !== 200) {
             alert('API Request failed. Please try again!');
+            document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg');
         }
     }
-    document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg');
     xhttp.send();
 };
 
