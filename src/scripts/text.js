@@ -115,10 +115,10 @@ class Text {
         this.checkWord();
     }
 
-    moveDiv(speed) {
+    moveDiv(selectedWPM) {
         let pos = 0;
         debugger;
-        const id = setInterval(frame, 40 - speed);
+        const id = setInterval(frame, selectedWPM);
         this.id = id;
         function frame() {
             // if (pos === 300) {

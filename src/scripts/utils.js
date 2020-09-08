@@ -8,7 +8,7 @@ export const FAMOUS_TEXTS = [
 
 
 //async
-export function loadText(topic, modalDiv, selectedSpeed) {
+export function loadText(topic, modalDiv, selectedWPM) {
 
     document.querySelector('.hidden-splash-bg').setAttribute('class', 'splash-bg');
 
@@ -49,7 +49,7 @@ export function loadText(topic, modalDiv, selectedSpeed) {
                     const text = new Text(contentRes);
                     modalDiv.style.display = 'none';
                     text.displayDiv();
-                    text.moveDiv(selectedSpeed);
+                    text.moveDiv(selectedWPM);
                     timer();
                 } else if (this.status !== 200) {
                     alert('API Request failed. Please try again!');

@@ -51,7 +51,7 @@ table {
 
 /* CSS */
 
-$arvo: 'Arvo', serif;
+$georgia: Georgia, 'Times New Roman', Times, serif;
 
 /* splash */
 
@@ -85,7 +85,7 @@ $arvo: 'Arvo', serif;
 
 #current {
     font-size: 25px;
-    font-family: $arvo;
+    font-family: $georgia;
     width: 700px;
     left: 50%;
     height: 50px;
@@ -97,18 +97,18 @@ $arvo: 'Arvo', serif;
 
 .correct {
     font-size: 25px;
-    font-family: $arvo;
+    font-family: $georgia;
     color: rgb(98, 177, 98);
 }
 
 .untyped {
     font-size: 25px;
-    font-family: $arvo;
+    font-family: $georgia;
 }
 
 .incorrect {
     font-size: 25px;
-    font-family: $arvo;
+    font-family: $georgia;
     color: red;
 }
 
@@ -131,7 +131,7 @@ $arvo: 'Arvo', serif;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    font-family: $arvo;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     color: white;
 }
 
@@ -185,7 +185,7 @@ $arvo: 'Arvo', serif;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    font-family: $arvo;
+    font-family: $georgia;
     color: white;
     display: none;
 }
@@ -197,6 +197,20 @@ $arvo: 'Arvo', serif;
     text-align: center;
     width: 100px;
     margin: 0 auto;
+    color: white;
+    background-color: 'rgba(0, 23, 95, 0.7)';
+}
+
+.selected-speed {
+    border: 1px solid white;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+    width: 100px;
+    margin: 0 auto;
+    color: 'rgba(0, 23, 95, 0.7)';
+    background-color: white;
+    color: blue;
 }
 
 /* timer */
@@ -206,5 +220,5 @@ $arvo: 'Arvo', serif;
     font-size: 40px;
     padding: 10px;
     margin: 10px;
-    font-family: $arvo;
+    font-family: $georgia;
 }

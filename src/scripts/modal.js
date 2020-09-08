@@ -14,47 +14,68 @@ export default class Modal {
     
     selectSpeed() {
         //note to self: see if i can use hover instead and pass in the class, so the code can be more DRY
-        const slow = document.querySelector('.speed.slow');
-        const medium = document.querySelector('.speed.medium');
-        const fast = document.querySelector('.speed.fast');
-        const startButton = document.querySelector('.start-button');
-        let that = this;
-        slow.addEventListener('click', () => {
-            slow.style.backgroundColor = 'white';
-            slow.style.color = 'rgba(0, 23, 95, 0.7)';
-            medium.style.backgroundColor = 'unset';
-            medium.style.color = 'white';
-            fast.style.backgroundColor = 'unset';
-            fast.style.color = 'white';
-            // Solution Attempt 1:
-            const slowSpeed = slow.dataset.speed;
-            debugger;
-            startButton.dataset.speed = slowSpeed;
-            // Solution Attempt 2:
-            // this.selectedSlow();
-        })
-        medium.addEventListener('click', () => {
-            medium.style.backgroundColor = 'white';
-            medium.style.color = 'rgba(0, 23, 95, 0.7)';
-            slow.style.backgroundColor = 'unset';
-            slow.style.color = 'white';
-            fast.style.backgroundColor = 'unset';
-            fast.style.color = 'white';
-            const mediumSpeed = medium.dataset.speed;
-            startButton.dataset.speed = mediumSpeed;
 
-            // debugger;
-        })
-        fast.addEventListener('click', () => {
-            fast.style.backgroundColor = 'white';
-            fast.style.color = 'rgba(0, 23, 95, 0.7)';
-            slow.style.backgroundColor = 'unset';
-            slow.style.color = 'white';
-            medium.style.backgroundColor = 'unset';
-            medium.style.color = 'white';
-            const fastSpeed = medium.dataset.speed;
-            startButton.dataset.speed = fastSpeed;
-        })
+        const speedButtons = document.getElementsByClassName('speed');
+        const startButton = document.querySelector('.start-button');
+debugger;
+        //not great space complexity, O(n), and time complexity, O(n^2) , but more DRY for now
+        for(let i = 0; i < speedButtons.length; i++) {
+            speedButtons[i].addEventListener('click', (e) => {
+                
+                const allSpeedButtons = document.querySelectorAll('[data-wpm]');
+
+                for (let j = 0; j < allSpeedButtons.length; j++) {
+                    debugger;
+                    allSpeedButtons[j].setAttribute('class', 'speed');
+                }
+                debugger;
+                e.currentTarget.setAttribute('class', 'selected-speed');
+                debugger;
+                startButton.dataset.selectedwpm = e.currentTarget.dataset.wpm;
+            })
+        }
+
+        // const slow = document.querySelector('.speed.slow');
+        // const medium = document.querySelector('.speed.medium');
+        // const fast = document.querySelector('.speed.fast');
+        // const startButton = document.querySelector('.start-button');
+        // let that = this;
+        // slow.addEventListener('click', () => {
+        //     slow.style.backgroundColor = 'white';
+        //     slow.style.color = 'rgba(0, 23, 95, 0.7)';
+        //     medium.style.backgroundColor = 'unset';
+        //     medium.style.color = 'white';
+        //     fast.style.backgroundColor = 'unset';
+        //     fast.style.color = 'white';
+        //     // Solution Attempt 1:
+        //     const slowSpeed = slow.dataset.speed;
+        //     debugger;
+        //     startButton.dataset.speed = slowSpeed;
+        //     // Solution Attempt 2:
+        //     // this.selectedSlow();
+        // })
+        // medium.addEventListener('click', () => {
+        //     medium.style.backgroundColor = 'white';
+        //     medium.style.color = 'rgba(0, 23, 95, 0.7)';
+        //     slow.style.backgroundColor = 'unset';
+        //     slow.style.color = 'white';
+        //     fast.style.backgroundColor = 'unset';
+        //     fast.style.color = 'white';
+        //     const mediumSpeed = medium.dataset.speed;
+        //     startButton.dataset.speed = mediumSpeed;
+
+        //     // debugger;
+        // })
+        // fast.addEventListener('click', () => {
+        //     fast.style.backgroundColor = 'white';
+        //     fast.style.color = 'rgba(0, 23, 95, 0.7)';
+        //     slow.style.backgroundColor = 'unset';
+        //     slow.style.color = 'white';
+        //     medium.style.backgroundColor = 'unset';
+        //     medium.style.color = 'white';
+        //     const fastSpeed = medium.dataset.speed;
+        //     startButton.dataset.speed = fastSpeed;
+        // })
     }
 
     // selectedSlow() {

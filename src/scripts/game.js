@@ -17,11 +17,11 @@ export default class Game {
             debugger;
             //condition: only run this code if div with id="current" has textContent.length > 0
             const inputFieldValue = document.getElementById('input-field').value;
-            const selectedSpeed = parseInt(start.dataset.speed);
+            const selectedWPM = parseInt(start.dataset.selectedwpm);
             
-            if (Number.isInteger(selectedSpeed) && inputFieldValue.length > 1) {
+            if (Number.isInteger(selectedWPM) && inputFieldValue.length > 1) {
 
-                loadText(inputFieldValue, this.modalDiv, selectedSpeed);
+                loadText(inputFieldValue, this.modalDiv, selectedWPM);
             }
         });
     }
