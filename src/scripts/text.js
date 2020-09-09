@@ -11,7 +11,7 @@ class Text {
         this.displayDiv = this.displayDiv.bind(this);
         this.checkWord = this.checkWord.bind(this);
         this.moveDiv = this.moveDiv.bind(this);
-        // this.listenForLose = this.listenForLose.bind(this);
+        this.listenForLose = this.listenForLose.bind(this);
         // this.onRefresh = this.onRefresh.bind(this);
         this.stopDiv = this.stopDiv.bind(this);
         // this.onRefresh();
@@ -120,6 +120,7 @@ class Text {
         debugger;
         const id = setInterval(frame, selectedWPM);
         this.id = id;
+        let that = this;
         function frame() {
             // if (pos === 300) {
             //     clearInterval(id);
@@ -127,7 +128,7 @@ class Text {
                 pos = pos + 0.10;
                 const currentDiv = document.getElementById('current');
                 currentDiv.style.bottom = pos + "%";
-                // that.listenForLose();
+                that.listenForLose();
             // }
         }
     }
@@ -136,26 +137,23 @@ class Text {
         clearInterval(this.id);
     }
 
-    // listenForLose() {
-    //     const body = document.querySelector('body');
-    //     const firstIncorrectSpan = document.getElementsByClassName('incorrect')[1];
+    listenForLose() {
+        const incorrectSpans = document.getElementsByClassName('incorrect');
+        const firstUntypedSpan = document.getElementsByClassName('untyped')[1];
+        let firstIncorrectSpanRect = null;
 
-    //     const bodyRect = body.getBoundingClientRect();
-    //     const firstIncorrectSpanRect = firstIncorrectSpan.getBoundingClientRect();
-        
-    //     window.firstIncorrectSpanRect = firstIncorrectSpanRect;
-    //     window.bodyRect = bodyRect;
-    
-    //     debugger;
-    //     if (bodyRect.top >= firstIncorrectSpanRect.top + 15) {
-    //         this.stopDiv();
-    //         const end = document.querySelector('.end-modal')
-    //         end.style.display = "flex";
-    //     }
-    // }
+        if (incorrectSpans.length > 0) {
+            let firstIncorrectSpan = incorrectSpans[0];
+            firstIncorrectSpanRect = firstIncorrectSpan.getBoundingClientRect().top + 10;
+        }
+        const firstUntypedSpanRect = firstUntypedSpan.getBoundingClientRect().top + 10;
 
-    
-
+        if (firstIncorrectSpanRect < 0 || firstUntypedSpanRect <= 0) {
+            this.stopDiv();
+            const end = document.querySelector('.end-modal')
+            end.style.display = "flex";
+        }
+    }
     // calcWPM(allWords, time) {
         // Words Per Minute(WPM) is the number of characters(including spaces and punctuation) typed in 1 minute, divided by 5.
 
