@@ -1,11 +1,6 @@
 import { newsAPI_key, articleExtractorAPI_key } from '../../config';
 import Text from './text';
-import { timer } from './timer';
-
-export const FAMOUS_TEXTS = [
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nec nam aliquam sem et tortor consequat id. Magna eget est lorem ipsum dolor sit amet consectetur. Eu consequat ac felis donec. Fermentum posuere urna nec tincidunt praesent semper feugiat. Tempor id eu nisl nunc. Risus pretium quam vulputate dignissim suspendisse. Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt. Ultrices sagittis orci a scelerisque. Et ligula ullamcorper malesuada proin libero nunc consequat. Sed lectus vestibulum mattis ullamcorper velit. Elementum facilisis leo vel fringilla est ullamcorper eget. Sit amet est placerat in egestas erat imperdiet sed euismod. Non tellus orci ac auctor augue mauris augue. Neque egestas congue quisque egestas diam in arcu cursus euismod. Enim tortor at auctor urna nunc id cursus metus aliquam. Suspendisse in est ante in nibh. Amet tellus cras adipiscing enim eu turpis egestas."
-]
-
+import Timer from './timer';
 
 //async
 export function loadText(topic, modalDiv, selectedWPM) {
@@ -46,11 +41,16 @@ export function loadText(topic, modalDiv, selectedWPM) {
                 if (this.readyState === 4 && this.status === 200) {
                     debugger;
                     const contentRes = JSON.parse(xhttpContentReq.response).text;
+
+                    //create a new menu modal and pass in text AND timer
+                    // OR pass into Game class, the text and timer and menu modal... 
                     const text = new Text(contentRes);
                     modalDiv.style.display = 'none';
                     text.displayDiv();
                     text.moveDiv(selectedWPM);
-                    timer();
+                    // timer();
+                    const timer = new Timer();
+                    timer.startTimer();
                 } else if (this.status !== 200) {
                     alert('API Request failed. Please try again!');
                 }

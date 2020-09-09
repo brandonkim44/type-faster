@@ -20,7 +20,6 @@ export default class Game {
             const selectedWPM = parseInt(start.dataset.selectedwpm);
             
             if (Number.isInteger(selectedWPM) && inputFieldValue.length > 1) {
-
                 loadText(inputFieldValue, this.modalDiv, selectedWPM);
             }
         });

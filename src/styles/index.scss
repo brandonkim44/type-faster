@@ -223,3 +223,38 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     margin: 10px;
     font-family: $georgia;
 }
+
+/* game options */
+
+/* game option button */
+
+.menu {
+    border: 1px solid black;
+    width: 120px;
+    padding: 5px;
+    font-size: 18px;
+    font-family: $georgia;
+    cursor: pointer;
+}
+
+/* options modal */
+
+.menu-modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 23, 95, 0.7);
+    z-index: 2;
+    max-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: $georgia;
+    color: white;
+    display: none;
+}
+
+
+

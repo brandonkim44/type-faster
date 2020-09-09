@@ -1,8 +1,6 @@
-import { FAMOUS_TEXTS, content } from './utils';
-
 class Text {
     constructor(responseText) {
-        this.id = null;
+        this.moveDivInterval = null;
         debugger;
         this.text = responseText;
         debugger;
@@ -118,8 +116,7 @@ class Text {
     moveDiv(selectedWPM) {
         let pos = 0;
         debugger;
-        const id = setInterval(frame, selectedWPM);
-        this.id = id;
+        this.moveDivInterval = setInterval(frame, selectedWPM);
         let that = this;
         function frame() {
             // if (pos === 300) {
@@ -134,7 +131,7 @@ class Text {
     }
 
     stopDiv() {
-        clearInterval(this.id);
+        clearInterval(this.moveDivInterval);
     }
 
     listenForLose() {
