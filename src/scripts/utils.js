@@ -1,9 +1,8 @@
 import { newsAPI_key, articleExtractorAPI_key } from '../../config';
-import Text from './text';
-import Timer from './timer';
+import Game from './game';
 
 //async
-export function loadText(topic, modalDiv, selectedWPM) {
+export function loadText(topic, selectedWPM) {
 
     document.querySelector('.hidden-splash-bg').setAttribute('class', 'splash-bg');
 
@@ -41,16 +40,11 @@ export function loadText(topic, modalDiv, selectedWPM) {
                 if (this.readyState === 4 && this.status === 200) {
                     debugger;
                     const contentRes = JSON.parse(xhttpContentReq.response).text;
-
                     //create a new menu modal and pass in text AND timer
                     // OR pass into Game class, the text and timer and menu modal... 
-                    const text = new Text(contentRes);
-                    modalDiv.style.display = 'none';
-                    text.displayDiv();
-                    text.moveDiv(selectedWPM);
-                    // timer();
-                    const timer = new Timer();
-                    timer.startTimer();
+                    document.querySelector('.start-modal').style.display = 'none';
+                    const game = new Game(contentRes, selectedWPM);
+                    
                 } else if (this.status !== 200) {
                     alert('API Request failed. Please try again!');
                 }

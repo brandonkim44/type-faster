@@ -1,27 +1,39 @@
-import { loadText } from './utils';
+import Text from './text';
+import Timer from './timer';
+import MenuModal from './menuModal';
 
 export default class Game {
-    constructor() {
-        debugger;
-        this.modalDiv = document.querySelector('.start-modal');
-        this.startGame = this.startGame.bind(this);
+    constructor(contentRes, selectedWPM) {
+        this.contentRes = contentRes;
+        this.selectedWPM = selectedWPM;
+
+        this.createText = this.createText.bind(this);
+        this.createTimer = this.createTimer.bind(this);
+        this.createMenuModal = this.createMenuModal.bind(this);
+
+        this.createText();
+        this.createTimer();
+        this.createMenuModal();
     }
 
-    startGame() {
-        //can set data attribute on html element, but user can change it...
-        const start = document.querySelector('.start-button');
-        // let that = this;
-        start.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            debugger;
-            //condition: only run this code if div with id="current" has textContent.length > 0
-            const inputFieldValue = document.getElementById('input-field').value;
-            const selectedWPM = parseInt(start.dataset.selectedwpm);
-            
-            if (Number.isInteger(selectedWPM) && inputFieldValue.length > 1) {
-                loadText(inputFieldValue, this.modalDiv, selectedWPM);
-            }
-        });
+    createText() {
+        const text = new Text(this.contentRes);
+        text.displayDiv();
+        text.moveDiv(this.selectedWPM);
+        this.stopDiv = text.stopDiv;
+        this.moveDiv = text.moveDiv;
+        this.checkCharacter = text.checkCharacter;
     }
-}
+
+    createTimer() {
+        const timer = new Timer();
+        timer.startTimer();
+        this.stopTimer = timer.stopTimer;
+    }
+
+    createMenuModal() {
+        //just pass this.text into menuModal...
+        const menuModal = new MenuModal(this.stopDiv, this.stopTimer, this.moveDiv, this.checkCharacter);
+        menuModal.openMenu();
+    }
+};
