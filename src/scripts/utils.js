@@ -9,7 +9,7 @@ export function loadText(topic, selectedWPM) {
     let url = 'http://newsapi.org/v2/top-headlines?' +
     `qInTitle=${topic}&` +
     `country=us&` +
-    `from=2020-08-10&` +
+    `from=2020-08-20&` +
     'language=en&' +
     'sortBy=relevancy&' +
     `apiKey=${newsAPI_key}`;
@@ -53,8 +53,7 @@ export function loadText(topic, selectedWPM) {
             xhttpContentReq.send();
         } else if (this.status !== 200) {
             alert('API Request failed. Please try again!');
-            document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg');
-        }
+            if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); };        }
     }
     xhttp.send();
 };

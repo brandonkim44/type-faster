@@ -24,16 +24,17 @@ export default class Game {
         this.moveDiv = text.moveDiv;
         this.checkCharacter = text.checkCharacter;
     }
-
+    
     createTimer() {
         const timer = new Timer();
         timer.startTimer();
         this.stopTimer = timer.stopTimer;
+        this.startTimer = timer.startTimer;
     }
 
     createMenuModal() {
         //just pass this.text into menuModal...
-        const menuModal = new MenuModal(this.stopDiv, this.stopTimer, this.moveDiv, this.checkCharacter);
+        const menuModal = new MenuModal(this.stopDiv, this.stopTimer, this.moveDiv, this.checkCharacter, this.startTimer);
         menuModal.openMenu();
     }
 };

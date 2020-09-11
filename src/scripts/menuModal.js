@@ -6,7 +6,6 @@ export default class MenuModal {
         this.checkCharacter = checkCharacter;
         this.startTimer = startTimer;
 
-
         this.openMenu = this.openMenu.bind(this);
         this.resume = this.resume.bind(this);
         this.restart = this.restart.bind(this);
@@ -16,11 +15,11 @@ export default class MenuModal {
 
     openMenu() {
         const menuButton = document.querySelector('.menu');
-        let that = this;
+        // let that = this;
         menuButton.addEventListener('click', () => {
             document.querySelector('.menu-modal').style.display = 'flex';
-            that.stopDiv();
-            // that.stopTimer();
+            this.stopDiv();
+            this.stopTimer();
             document.removeEventListener('keydown', this.checkCharacter);
         });
     }
@@ -28,17 +27,13 @@ export default class MenuModal {
     resume() {
         const resumeButton = document.querySelector('.resume');
         let that = this;
-
         resumeButton.addEventListener('click', () => {
             const start = document.querySelector('.start-button');
             document.querySelector('.menu-modal').style.display = 'none';
             const selectedWPM = parseInt(start.dataset.selectedwpm);
-            that.moveDiv(selectedWPM);
-            const currentTime = document.querySelector('[data-time]');
-            
-            that.startTimer();
+            this.moveDiv(selectedWPM);
+            this.startTimer();            
             document.addEventListener('keydown', this.checkCharacter);
-
         });
     }
 
