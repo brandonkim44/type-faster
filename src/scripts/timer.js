@@ -12,53 +12,7 @@ export default class Timer {
         this.offset = 0;
     }
 
-    // startTimer() {
-
-    //     this.timerInterval = setInterval(addTime, 1000);
-
-    //     let secs = 0, minutes = 0, hours = 0, currentTime = 0;
-
-    //     let isPaused = false;
-    //     let time = new Date();
-    //     let offset = 0;
-
-    //     const that = this;
-
-    //     function addTime() {
-    //         if (!isPaused) {
-    //             let ms = offset + (new Date()).getTime() - time.getTime();
-
-    //         }
-    //         secs++;
-    //         if (secs >= 60) {
-    //             secs = 0;
-    //             minutes++;
-    //             if (minutes >= 60) {
-    //                 minutes = 0;
-    //                 hours++;
-    //             }
-    //         }
-    //         currentTime = (secs / 60) + minutes + (hours * 60);
-    //         that.printTime(secs, minutes, hours);
-    //         that.updateTime(currentTime);
-    //     };
-    // }
-
     startTimer() {
-        
-        // const resume = document.querySelector('.resume');
-        // const pause = document.querySelector('.menu');
-
-        // const toggleTimer = (e) => {
-        //     e.preventDefault();
-        //     stopped = !stopped;
-        //     if (stopped) {
-        //         offset += (new Date()).getTime() - this.startTime;
-        //     } else {
-        //         time = new Date();
-        //     }
-        // }
-        // resume.addEventListener('click', toggleTimer);
         this.stopped = false;
         this.startTime = (new Date()).getTime();
         this.timerInterval = setInterval(this.addTime, 10);
@@ -103,7 +57,9 @@ export default class Timer {
     stopTimer() {
         this.stopped = true;
         this.offset += (new Date()).getTime() - this.startTime;
-        // clearInterval(this.timerInterval);
-        //pause timer by toggling it
+    }
+
+    restartTimer() {
+        this.offset = 0;
     }
 }

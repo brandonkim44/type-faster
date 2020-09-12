@@ -6,12 +6,13 @@ export function loadText(topic, selectedWPM) {
 
     document.querySelector('.hidden-splash-bg').setAttribute('class', 'splash-bg');
 
-    let url = 'http://newsapi.org/v2/top-headlines?' +
-    `qInTitle=${topic}&` +
-    `country=us&` +
-    `from=2020-08-20&` +
+    let lastWeeksDate = getLastWeeksDate();
+
+    let url = 'http://newsapi.org/v2/everything?' +
+    `q=${topic}&` +
+    `from=${lastWeeksDate}&` +
     'language=en&' +
-    'sortBy=relevancy&' +
+    'sortBy=popularity&' +
     `apiKey=${newsAPI_key}`;
     
     const xhttp = new XMLHttpRequest();
@@ -19,7 +20,7 @@ export function loadText(topic, selectedWPM) {
 
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            
+            console.log(lastWeeksDate);
             const res = JSON.parse(xhttp.response);
             const numOfArticles = res.articles.length - 1;
             const randomArticleNum = Math.floor((Math.random() * numOfArticles) + 1);
@@ -40,8 +41,6 @@ export function loadText(topic, selectedWPM) {
                 if (this.readyState === 4 && this.status === 200) {
                     debugger;
                     const contentRes = JSON.parse(xhttpContentReq.response).text;
-                    //create a new menu modal and pass in text AND timer
-                    // OR pass into Game class, the text and timer and menu modal... 
                     document.querySelector('.start-modal').style.display = 'none';
                     const game = new Game(contentRes, selectedWPM);
                     
@@ -58,15 +57,22 @@ export function loadText(topic, selectedWPM) {
     xhttp.send();
 };
 
-//     //If we want news articles from today
+//hoisting
 
-//     // const today = new Date();
-//     // const dd = today.getDate();
-//     // const mm = today.getMonth()+1;
-//     // const year = today.getFullYear().toString();
-//     // let day = "";
-//     // let month = "";
-//     // if (dd < 10) { day = '0' + dd.toString();} else { day = dd.toString();};
-//     // if (mm < 10) { month = '0' + mm.toString();} else { month = mm.toString();};
-//     // let todaysDate = "";
-//     // todaysDate = year+'-'+month+'-'+day;
+function getLastWeeksDate () {
+    const today = new Date();
+        const lastWeek = new Date(today);
+        lastWeek.setDate(lastWeek.getDate() - 7);
+
+    const dd = lastWeek.getDate();
+    const mm = lastWeek.getMonth()+1;
+    const year = lastWeek.getFullYear().toString();
+    let day = "";
+    let month = "";
+    if (dd < 10) { day = '0' + dd.toString();} else { day = dd.toString();};
+    if (mm < 10) { month = '0' + mm.toString();} else { month = mm.toString();};
+    let lastWeeksDate = "";
+    lastWeeksDate = year+'-'+month+'-'+day;
+    return lastWeeksDate;
+}
+

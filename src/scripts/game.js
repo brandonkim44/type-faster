@@ -11,30 +11,31 @@ export default class Game {
         this.createTimer = this.createTimer.bind(this);
         this.createMenuModal = this.createMenuModal.bind(this);
 
-        this.createText();
         this.createTimer();
+        this.createText();
         this.createMenuModal();
+    }
+    
+    createTimer() {
+        const timer = new Timer();
+        this.timer = timer;
+        timer.startTimer();
+        this.stopTimer = timer.stopTimer;
+        this.startTimer = timer.startTimer;
     }
 
     createText() {
-        const text = new Text(this.contentRes);
+        const text = new Text(this.contentRes, this.timer);
         text.displayDiv();
         text.moveDiv(this.selectedWPM);
         this.stopDiv = text.stopDiv;
         this.moveDiv = text.moveDiv;
         this.checkCharacter = text.checkCharacter;
     }
-    
-    createTimer() {
-        const timer = new Timer();
-        timer.startTimer();
-        this.stopTimer = timer.stopTimer;
-        this.startTimer = timer.startTimer;
-    }
 
     createMenuModal() {
-        //just pass this.text into menuModal...
         const menuModal = new MenuModal(this.stopDiv, this.stopTimer, this.moveDiv, this.checkCharacter, this.startTimer);
         menuModal.openMenu();
     }
+
 };

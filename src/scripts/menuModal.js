@@ -11,11 +11,11 @@ export default class MenuModal {
         this.restart = this.restart.bind(this);
 
         this.resume();
+        this.restart();
     }
 
     openMenu() {
         const menuButton = document.querySelector('.menu');
-        // let that = this;
         menuButton.addEventListener('click', () => {
             document.querySelector('.menu-modal').style.display = 'flex';
             this.stopDiv();
@@ -26,7 +26,6 @@ export default class MenuModal {
 
     resume() {
         const resumeButton = document.querySelector('.resume');
-        let that = this;
         resumeButton.addEventListener('click', () => {
             const start = document.querySelector('.start-button');
             document.querySelector('.menu-modal').style.display = 'none';
@@ -39,9 +38,8 @@ export default class MenuModal {
 
     restart() {
         const restartButton = document.querySelector('.restart');
-        let that = this;
         restartButton.addEventListener('click', () => {
-
+            window.location.reload();
         });
     }
 }

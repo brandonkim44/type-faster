@@ -1,5 +1,6 @@
 class Text {
-    constructor(responseText) {
+    constructor(responseText, timer) {
+        this.timer = timer;
         this.moveDivInterval = null;
         this.pos = 0;
         debugger;
@@ -11,13 +12,11 @@ class Text {
         this.checkWord = this.checkWord.bind(this);
         this.moveDiv = this.moveDiv.bind(this);
         this.listenForLose = this.listenForLose.bind(this);
-        // this.onRefresh = this.onRefresh.bind(this);
         this.stopDiv = this.stopDiv.bind(this);
-        // this.onRefresh();
-    }
-
-    randomTextGenerator() {
-
+        this.isGameOver = this.isGameOver.bind(this);
+        this.displayWin = this.displayWin.bind(this);
+        this.calcAcc = this.calcAcc;
+        this.calcWPM = this.calcWPM;
     }
 
     _currentDiv() {
@@ -30,12 +29,16 @@ class Text {
             return span;
         });
     }
-
+    
     checkWord() {
-        let currentIndex = 0, correctCount = 0, uncorrectedErrorCount = 0, totalTypedCount = 0, accuracy = 0, netWPM = 0;
+        let currentIndex = 0, correctCount = 0, uncorrectedErrorCount = 0, totalTypedCount = 0;
+        
         
         const checkCharacter = (e) => {
             e.preventDefault();
+            debugger;
+            
+            debugger;
             let currentCharacterSpan = this.charsSpans[currentIndex];
             let currentCharacter = currentCharacterSpan.innerText;
             const untypedSpans = document.getElementsByClassName('untyped');
@@ -43,21 +46,15 @@ class Text {
             const incorrectSpans = document.getElementsByClassName('incorrect');
             const lastCorrectElement = correctSpans.length - 1;
             const lastIncorrectElement = incorrectSpans.length - 1;
-
-            //currentCharacter = checkCharacter(currentCharacter);
-            //checkCharacter will be a case switch
-            // check for emdash, accent signs on e, a, i, o u, 
-
+            
+            // check for emdash, potentially for accent signs with e, a, i, o u in the future
+            
             if (e.key === currentCharacter || (e.key === "-" && currentCharacter === "—")) {
-                // currentCharacterSpan.remove();
-                debugger;
                 if (currentIndex > 0) {
                     let previousCharacterSpan = this.charsSpans[currentIndex - 1];
                     if (previousCharacterSpan.className === "correct") correctSpans[lastCorrectElement].style.borderRight = "unset";
                     if (previousCharacterSpan.className === "incorrect") incorrectSpans[lastIncorrectElement].style.borderRight = "unset";
                 }
-                debugger;
-                // currentCharacterSpan.style.visibility = "hidden";
                 untypedSpans[1].style.borderRight = "1px solid black";
                 currentCharacterSpan.setAttribute('class', 'correct');
                 if (currentCharacterSpan.dataset.incorrect) { currentCharacterSpan.removeAttribute('data-incorrect'); };
@@ -65,7 +62,7 @@ class Text {
                 correctCount++;
                 currentIndex++;
             } else if (e.keyCode === 8) {
-                debugger;
+                
                 if (currentIndex > 0) {
                     currentCharacterSpan = this.charsSpans[currentIndex - 1];
                     currentCharacterSpan.style.borderRight = "unset";
@@ -76,11 +73,11 @@ class Text {
                     currentCharacterSpan.setAttribute('class', 'untyped');
                     currentIndex--;
                 }
-                debugger;
+                
             } else if (e.shiftKey) {
                 return null;
             } else if (e.key !== currentCharacter) {
-                debugger;
+                
                 if (currentIndex > 0) {
                     let previousCharacterSpan = this.charsSpans[currentIndex - 1];
                     if (previousCharacterSpan.className === "correct") correctSpans[lastCorrectElement].style.borderRight = "unset";
@@ -91,24 +88,16 @@ class Text {
                 currentCharacterSpan.setAttribute('data-incorrect', 'true');
                 totalTypedCount++;
                 currentIndex++;
-                debugger;
             }
-            //calculate accuracy
-            if (totalTypedCount !== 0) { accuracy = ((correctCount / totalTypedCount) * 100).toFixed(2); };
-
-            //calculateWPM
-            let uncorrectedChars = document.querySelectorAll('[data-incorrect]');
-            if (uncorrectedChars) { uncorrectedErrorCount = document.querySelectorAll('[data-incorrect]').length; };
-            let time = document.getElementById('timer').dataset.time;
-            debugger;
-            netWPM = Math.round(((totalTypedCount / 5) - uncorrectedErrorCount) / parseFloat(time));
-            if (netWPM < 0) { netWPM = 0; };
-            debugger;
-            document.getElementById('wpm').innerText = netWPM.toString();
+            this.calcAcc(totalTypedCount, correctCount);
+            this.calcWPM(totalTypedCount, uncorrectedErrorCount);
+            
+            if (this.isGameOver()) {
+                this.stopDiv();
+                this.displayWin();
+            }
         }
-        
         this.checkCharacter = checkCharacter;
-
         document.addEventListener('keydown', checkCharacter);
     }
 
@@ -118,19 +107,15 @@ class Text {
     }
 
     moveDiv(selectedWPM, pos = this.pos) {
-        debugger;
+        
         this.moveDivInterval = setInterval(frame, selectedWPM);
         let that = this;
         function frame() {
-            // if (pos === 300) {
-            //     clearInterval(id);
-            // } else {
-                pos = pos + 0.10;
-                that.pos = pos;
-                const currentDiv = document.getElementById('current');
-                currentDiv.style.bottom = pos + "%";
-                that.listenForLose();
-            // }
+            pos = pos + 0.10;
+            that.pos = pos;
+            const currentDiv = document.getElementById('current');
+            currentDiv.style.bottom = pos + "%";
+            that.listenForLose();
         }
     }
 
@@ -155,13 +140,40 @@ class Text {
             end.style.display = "flex";
         }
     }
-    // calcWPM(allWords, time) {
-        // Words Per Minute(WPM) is the number of characters(including spaces and punctuation) typed in 1 minute, divided by 5.
+    calcWPM(totalTypedCount, uncorrectedErrorCount) {
+        let netWPM = 0;
+        let uncorrectedChars = document.querySelectorAll('[data-incorrect]');
+        if (uncorrectedChars) { uncorrectedErrorCount = document.querySelectorAll('[data-incorrect]').length; };
+        let time = document.getElementById('timer').dataset.time;
 
-        // const grossWPM = allWords / time;
-        // const errorRate = 
-        // const netWPM = [(allTypedEntries/5) - uncorrectedErrors]/time(min)
-    // }
+        netWPM = Math.round(((totalTypedCount / 5) - uncorrectedErrorCount) / parseFloat(time));
+        if (netWPM < 0) { netWPM = 0; };
+      
+        document.getElementById('final-wpm').innerText = 'Final WPM: ' + netWPM.toString();
+    }
+
+    calcAcc(totalTypedCount, correctCount) {
+        let accuracy = 0;
+        if (totalTypedCount !== 0) { accuracy = ((correctCount / totalTypedCount) * 100).toFixed(2); };
+        const accSpan = document.querySelector('.accuracy');
+        accSpan.innerHTML = 'Accuracy: ' + accuracy.toString() + '%';
+    }
+
+    isGameOver() {
+        const untypedSpansLeft = document.getElementsByClassName('untyped');
+        return untypedSpansLeft.length <= 1;
+    }
+
+    displayWin() {
+        document.removeEventListener('keydown', this.checkCharacter);
+        const winModal = document.querySelector('.win-modal');
+        winModal.style.display = 'flex';
+        this.timer.stopTimer();
+        const playAgainButton = document.querySelector('.play-again');
+        playAgainButton.addEventListener('click', () => {
+            window.location.reload();
+        });
+    }
 }
 
 export default Text;
