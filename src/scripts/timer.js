@@ -15,7 +15,7 @@ export default class Timer {
     startTimer() {
         this.stopped = false;
         this.startTime = (new Date()).getTime();
-        this.timerInterval = setInterval(this.addTime, 10);
+        this.timerInterval = setInterval(this.addTime, 50);
     }
 
     addTime() {
@@ -26,21 +26,22 @@ export default class Timer {
             let newTime = (new Date()).getTime();
             debugger;
             let totalTimePassed = this.offset + (newTime - this.startTime);
-              
+            
             secs = parseInt(totalTimePassed / 1000);
             ms = totalTimePassed % 1000;
-
+            
+            
             if (secs >= 3600) {
-                hours = (secs / 3600).toFixed(0);
+                hours = Math.trunc(secs / 3600);
                 secs = secs % 3600;
             }
+            
             if (secs >= 60) {
-                minutes = (secs / 60).toFixed();
+                minutes = Math.trunc(secs / 60);
                 secs = secs % 60;
             }
-
-            currentTime = parseFloat(secs / 60) + parseFloat(minutes) + parseFloat(hours * 60);
-            // this.currentTime = currentTime;
+            currentTime = parseFloat(secs / 60) + parseInt(minutes) + parseInt(hours * 60);
+            
             this.printTime(secs, minutes, hours, ms);
             this.updateTime(currentTime);
         }
@@ -57,9 +58,5 @@ export default class Timer {
     stopTimer() {
         this.stopped = true;
         this.offset += (new Date()).getTime() - this.startTime;
-    }
-
-    restartTimer() {
-        this.offset = 0;
     }
 }

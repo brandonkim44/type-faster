@@ -12,9 +12,7 @@ export default class StartModal {
         //not great space complexity, O(n), and time complexity, O(n^2) , but more DRY for now
         for(let i = 0; i < speedButtons.length; i++) {
             speedButtons[i].addEventListener('click', (e) => {
-                
                 const allSpeedButtons = document.querySelectorAll('[data-wpm]');
-
                 for (let j = 0; j < allSpeedButtons.length; j++) {
                     debugger;
                     allSpeedButtons[j].setAttribute('class', 'speed');
@@ -33,7 +31,13 @@ export default class StartModal {
             e.preventDefault();
             const inputFieldValue = document.getElementById('input-field').value;
             const selectedWPM = parseInt(start.dataset.selectedwpm);
-            if (Number.isInteger(selectedWPM) && inputFieldValue.length > 1) {
+            if (!Number.isInteger(selectedWPM)) {
+                document.querySelector('.speed-error').style.display = 'unset';
+            }
+            if (inputFieldValue.length <= 1) {
+                document.querySelector('.field-error').style.display = 'unset';
+            }
+            if (Number.isInteger(selectedWPM) && inputFieldValue.length > 1) {             
                 loadText(inputFieldValue, selectedWPM);
             }
         });

@@ -3,9 +3,7 @@ class Text {
         this.timer = timer;
         this.moveDivInterval = null;
         this.pos = 0;
-        debugger;
-        this.text = responseText;
-        debugger;
+        this.text = 'hello';
         this.chars = this.text.split("");
         this._currentDiv = this._currentDiv.bind(this);
         this.displayDiv = this.displayDiv.bind(this);
@@ -17,6 +15,7 @@ class Text {
         this.displayWin = this.displayWin.bind(this);
         this.calcAcc = this.calcAcc;
         this.calcWPM = this.calcWPM;
+        this.checkEdgeCases = this.checkEdgeCases;
     }
 
     _currentDiv() {
@@ -36,9 +35,6 @@ class Text {
         
         const checkCharacter = (e) => {
             e.preventDefault();
-            debugger;
-            
-            debugger;
             let currentCharacterSpan = this.charsSpans[currentIndex];
             let currentCharacter = currentCharacterSpan.innerText;
             const untypedSpans = document.getElementsByClassName('untyped');
@@ -47,9 +43,7 @@ class Text {
             const lastCorrectElement = correctSpans.length - 1;
             const lastIncorrectElement = incorrectSpans.length - 1;
             
-            // check for emdash, potentially for accent signs with e, a, i, o u in the future
-            
-            if (e.key === currentCharacter || (e.key === "-" && currentCharacter === "—")) {
+            if (e.key === currentCharacter || this.checkEdgeCases(e.key, currentCharacter)) {
                 if (currentIndex > 0) {
                     let previousCharacterSpan = this.charsSpans[currentIndex - 1];
                     if (previousCharacterSpan.className === "correct") correctSpans[lastCorrectElement].style.borderRight = "unset";
@@ -135,12 +129,19 @@ class Text {
         const firstUntypedSpanRect = firstUntypedSpan.getBoundingClientRect().top + 10;
 
         if (firstIncorrectSpanRect < 0 || firstUntypedSpanRect <= 0) {
+            document.removeEventListener('keydown', this.checkCharacter);
+            document.querySelector('.end-modal').style.display = 'flex';
             this.stopDiv();
-            const end = document.querySelector('.end-modal')
-            end.style.display = "flex";
+            this.timer.stopTimer();
+            const playAgainButton = document.querySelector('.play-again');
+            playAgainButton.addEventListener('click', () => {
+                window.location.reload();
+            });
         }
     }
+
     calcWPM(totalTypedCount, uncorrectedErrorCount) {
+        debugger;
         let netWPM = 0;
         let uncorrectedChars = document.querySelectorAll('[data-incorrect]');
         if (uncorrectedChars) { uncorrectedErrorCount = document.querySelectorAll('[data-incorrect]').length; };
@@ -148,7 +149,8 @@ class Text {
 
         netWPM = Math.round(((totalTypedCount / 5) - uncorrectedErrorCount) / parseFloat(time));
         if (netWPM < 0) { netWPM = 0; };
-      
+    
+        document.getElementById('wpm').innerText = 'WPM: ' + netWPM.toString();
         document.getElementById('final-wpm').innerText = 'Final WPM: ' + netWPM.toString();
     }
 
@@ -166,13 +168,33 @@ class Text {
 
     displayWin() {
         document.removeEventListener('keydown', this.checkCharacter);
-        const winModal = document.querySelector('.win-modal');
+        const winModal = document.querySelector('.end-modal');
         winModal.style.display = 'flex';
         this.timer.stopTimer();
         const playAgainButton = document.querySelector('.play-again');
         playAgainButton.addEventListener('click', () => {
             window.location.reload();
         });
+    }
+
+    checkEdgeCases(pressedKey, currentcharacter) {
+        //gotta figure out emojis at a later date...
+    
+        const accentedAs = ['À', 'à', 'Á', 'á', 'Ã', 'ã', 'Ä', 'ä'];
+        const accentedEs = ['È', 'è', 'É', 'é', 'Ê', 'ê', 'Ë', 'ë'];
+        const accentedIs = ['Ì', 'ì', 'Í', 'í', 'Î', 'î', 'Ï', 'ï'];
+        const accentedOs = ['Ò', 'ò', 'Ó', 'ó', 'Ô', 'ô', 'Õ', 'õ', 'Ö', 'ö'];
+        const accentedUs = ['Ù', 'ù', 'Ú', 'ú', 'Û', 'û', 'Ü', 'ü'];
+        const accentedNs = ['Ñ', 'ñ'];
+        
+        if (pressedKey === "-" && currentCharacter === "—") { return true; };
+        if (pressedKey === "a" && accentedAs.includes(currentcharacter)) { return true; }
+        if (pressedKey === "e" && accentedEs.includes(currentcharacter)) { return true; }
+        if (pressedKey === "i" && accentedIs.includes(currentcharacter)) { return true; }
+        if (pressedKey === "o" && accentedOs.includes(currentcharacter)) { return true; }
+        if (pressedKey === "u" && accentedUs.includes(currentcharacter)) { return true; }
+        if (pressedKey === "n" && accentedNs.includes(currentcharacter)) { return true; }
+        return false;
     }
 }
 

@@ -5,7 +5,7 @@ import Game from './game';
 export function loadText(topic, selectedWPM) {
 
     document.querySelector('.hidden-splash-bg').setAttribute('class', 'splash-bg');
-
+    document.querySelector('.waiting-comic').style.display = 'unset';
     let lastWeeksDate = getLastWeeksDate();
 
     let url = 'http://newsapi.org/v2/everything?' +
@@ -20,7 +20,6 @@ export function loadText(topic, selectedWPM) {
 
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(lastWeeksDate);
             const res = JSON.parse(xhttp.response);
             const numOfArticles = res.articles.length - 1;
             const randomArticleNum = Math.floor((Math.random() * numOfArticles) + 1);
@@ -42,8 +41,11 @@ export function loadText(topic, selectedWPM) {
                     debugger;
                     const contentRes = JSON.parse(xhttpContentReq.response).text;
                     document.querySelector('.start-modal').style.display = 'none';
+                    document.querySelector('.author').style.display = 'flex';
+                    document.querySelector('.title').style.display = 'flex';
+                    document.querySelector('.timer').style.display = 'flex';
+                    document.querySelector('.menu').style.display = 'flex';   
                     const game = new Game(contentRes, selectedWPM);
-                    
                 } else if (this.status !== 200) {
                     alert('API Request failed. Please try again!');
                 }

@@ -15,10 +15,16 @@
             <div class="modal-container">
                 <h1 class="instructions-header">Instructions</h1>
                 <p>
-                    Lines of text will appear at the bottom of the page
+                    Practice your typing while learning to write like a journalist!
+                <br>
+                <br>
+                    You'll select a typing speed and enter a word below. We'll try to
+                    find an article that contains your word.
+                <br>
+                <br>
+                    Once you click start, lines of text will appear at the bottom of the page
                     and move up towards the top of the page. Type the words out
-                    before they hit the top, or you lose.
-                    Be careful...The longer you play, the faster the lines move!
+                    before they hit the top, or you lose!
                 </p>
                 <br>
                 <p>Please select your starting speed:</p>
@@ -31,22 +37,16 @@
                 <br>
                 <span class="speed" data-wpm="97">90 WPM</span>
                 <br>
+                <span class="speed-error">Please select a speed</span>
                 <label>
-                    Please enter a topic you'd like to learn about:
+                    Please enter a word:
                     <input type="text" id="input-field">
                 </label>
+                <span class="field-error">Please enter a valid word</span>
                 <br>
                 <span class="start-button" data-selectedwpm="null">Start</span>
-            </div>
-        </div>
-        <div class="end-modal">
-            <div class="modal-container">
-                <h1 class="instructions-header">You lost :(</h1>
-                <p>
-                    Try again!
-                </p>
                 <br>
-                <span class="play-again-button">Play Again</span>
+                *Note: If you encounter any accent marks on any vowels, simply type the vowel without the accent.
             </div>
         </div>
         <div class="menu-modal">
@@ -55,27 +55,36 @@
                 <span class="restart">Restart</span>
             </div>
         </div>
-        <div class="win-modal">
+        <div class="end-modal">
             <div class="modal-container">
-                <span>Awesome Job</span>
-                <span id='final-wpm' class="final-wpm"></span>
-                <span class="accuracy"></span>
+                <div class="end-info">
+                    <span id='final-wpm' class="final-wpm"></span>
+                    <span class="accuracy"></span>
+                </div>
                 <span class="play-again">Play again</span>
             </div>
         </div>
         <div id="text" class="loading-text"></div>
         <div id="current" class="untyped"></div>
-        <span>Title:
-            <div class="title"></div>
-        </span>
-        <span>Author: 
-            <div class="author"></div>
-        </span>
+        <div class="game-container">
+            <span class="title-header">Title:</span>
+            <br>
+            <span class="title"></span>
+            <br>
+            <br>
+            <span class="author-header">Author:</span>
+            <br>
+            <span class="author"></span>
+            <br>
+            <div id="wpm" class="wpm"></div>
+            <br>
+            <div class="menu">Pause / Menu</div>
+        </div>
         <div id="timer" class="timer" data-time="0">00:00:00:0000</div>
-        <div id="wpm" class="wpm"></div>
-        <div class="menu">Pause / Menu</div>
     </body>
     <div class="splash-bg">
         <object class="splash-img" data="src/images/loading.gif"></object>
+        <!--- New Yorker Comic "Now we wait" by David Borchart -->
+        <img class="waiting-comic" src="./src/images/waiting.jpg" alt="waiting">
     </div>
 </html>

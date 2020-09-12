@@ -66,6 +66,7 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .hidden-splash-bg {
@@ -79,6 +80,11 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     height: 100px;
     padding: 0;
     border-bottom: 2px solid white;
+}
+
+.waiting-comic {
+    margin-top: 10px;
+    display: none;
 }
 
 /* Text */
@@ -118,7 +124,7 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
 }
 
 
-/* Modal */
+/* Start Modal */
 
 .start-modal {
     position: fixed;
@@ -162,33 +168,14 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     color: #3d6eff;
 }
 
-.play-again-button {
-    padding: 5px;
-    border: 1px solid white;
-    cursor: pointer;
-    text-align: center;
-}
-
-.play-again-button:hover {
-    background-color: white;
-    color: #3d6eff;
-}
-
-.end-modal {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background: rgba(0, 23, 95, 0.7);
-    z-index: 2;
-    max-height: 100vh;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    font-family: $georgia;
-    color: white;
+.field-error {
     display: none;
+    color: #FF4C4C;
+}
+
+.speed-error {
+    display: none;
+    color: #FF4C4C;
 }
 
 .speed {
@@ -200,6 +187,11 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     margin: 0 auto;
     color: white;
     background-color: 'rgba(0, 23, 95, 0.7)';
+}
+
+.speed:hover {
+    background-color: white;
+    color: #3d6eff;
 }
 
 .selected-speed {
@@ -214,15 +206,40 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     color: blue;
 }
 
+.title-header {
+    font-weight: bold;
+}
+
+.author-header {
+    font-weight: bold;
+}
+
+.game-container > span {
+    font-size: 16px;
+    font-family: $georgia;
+    padding: 3px;
+}
+
+/* display: none; */
+
+
+/* display: none; */
+#input-field {
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
 /* timer */
 
 .timer {
     color: #3d6eff;
-    font-size: 40px;
+    font-size: 30px;
     padding: 10px;
     margin: 10px;
     font-family: $georgia;
 }
+/* display: none; */
 
 /* game options */
 
@@ -235,6 +252,13 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     font-size: 18px;
     font-family: $georgia;
     cursor: pointer;
+    text-align: center;
+}
+/* display: none; */
+
+.menu:hover {
+    background-color: white;
+    color: #3d6eff;
 }
 
 /* options modal */
@@ -297,9 +321,10 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     display: none;
 }
 
-/* win modal */
+/* end modal */
 
-.win-modal {
+
+.end-modal {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -316,4 +341,39 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     display: none;
 }
 
+.final-wpm {
+    margin-bottom: 10px;
+    font-size: 40px;
+}
+
+.accuracy {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.end-info {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+}
+
+.game-container {
+    height: 100%;
+    width: 250px;
+    margin-left: 20px;
+    margin-top: 40px;
+}
+
+.play-again {
+    padding: 5px;
+    border: 1px solid white;
+    cursor: pointer;
+    text-align: center;
+}
+
+.play-again:hover {
+    background-color: white;
+    color: #3d6eff;
+}
 
