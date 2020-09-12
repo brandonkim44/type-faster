@@ -8,7 +8,7 @@ export function loadText(topic, selectedWPM) {
     document.querySelector('.waiting-comic').style.display = 'unset';
     let lastWeeksDate = getLastWeeksDate();
 
-    let url = 'http://newsapi.org/v2/everything?' +
+    let url = 'https://newsapi.org/v2/everything?' +
     `q=${topic}&` +
     `from=${lastWeeksDate}&` +
     'language=en&' +

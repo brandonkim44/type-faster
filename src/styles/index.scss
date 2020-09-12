@@ -218,12 +218,9 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     font-size: 16px;
     font-family: $georgia;
     padding: 3px;
+    display: none;
 }
 
-/* display: none; */
-
-
-/* display: none; */
 #input-field {
     outline: none;
     border: none;
@@ -238,8 +235,8 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     padding: 10px;
     margin: 10px;
     font-family: $georgia;
+    display: none;
 }
-/* display: none; */
 
 /* game options */
 
@@ -253,8 +250,8 @@ $georgia: Georgia, 'Times New Roman', Times, serif;
     font-family: $georgia;
     cursor: pointer;
     text-align: center;
+    display: none;
 }
-/* display: none; */
 
 .menu:hover {
     background-color: white;

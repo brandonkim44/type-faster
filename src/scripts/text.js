@@ -3,7 +3,7 @@ class Text {
         this.timer = timer;
         this.moveDivInterval = null;
         this.pos = 0;
-        this.text = 'hello';
+        this.text = responseText;
         this.chars = this.text.split("");
         this._currentDiv = this._currentDiv.bind(this);
         this.displayDiv = this.displayDiv.bind(this);
