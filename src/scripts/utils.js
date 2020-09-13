@@ -24,8 +24,8 @@ export function loadText(topic, selectedWPM) {
         .then(function (data) {
             const numOfArticles = data.articles.length;
             const randomArticleNum = Math.floor(Math.random() * numOfArticles + 1);
-            if (article) {
-                const article = data.articles[randomArticleNum];
+            const article = data.articles[randomArticleNum];
+                if (article) {
                 const articleURL = article.url;
             
                 const lexperAPIURL = `https://lexper.p.rapidapi.com/v1.1/extract?media=1&url=${articleURL}`;
@@ -60,8 +60,9 @@ export function loadText(topic, selectedWPM) {
                         const game = new Game(text, selectedWPM);
                         if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); }; 
                     })
-            } else {
-                alert('Could not find an article with that word. Please try again!');
+                } else {
+                    alert('Could not find an article with that word. Please try again!');
+                    if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); }; 
             }
     });
 };
