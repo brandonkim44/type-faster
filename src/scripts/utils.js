@@ -25,7 +25,6 @@ export function loadText(topic, selectedWPM) {
             const numOfArticles = data.articles.length;
             const randomArticleNum = Math.floor(Math.random() * numOfArticles + 1);
             const article = data.articles[randomArticleNum];
-            console.log(article);
             const articleURL = article.url;
         
             const lexperAPIURL = `https://lexper.p.rapidapi.com/v1.1/extract?media=1&url=${articleURL}`;
@@ -48,7 +47,6 @@ export function loadText(topic, selectedWPM) {
                     const author = data.article.author;
                     const title = data.article.title;
                     const text = data.article.text;
-                    console.log(text);
                     document.querySelector(".author").innerText = author;
                     document.querySelector(".title").innerText = title;
                     document.querySelector(".start-modal").style.display = "none";
