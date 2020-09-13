@@ -74,7 +74,7 @@ function getLastWeeksDate() {
         lastWeek.setDate(lastWeek.getDate() - 7);
         lastWeek = lastWeek.toISOString();
     return lastWeek;
-}
+};
 
 function handleErrors(response) {
     if (!response.ok) {
@@ -84,5 +84,5 @@ function handleErrors(response) {
         throw Error(statusMessage);
     }
     return response;
-}
+};
 
