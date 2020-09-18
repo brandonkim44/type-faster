@@ -1,5 +1,3 @@
-import { loadText } from './utils';
-
 export default class StartModal {
     constructor() {
         this.selectSpeed = this.selectSpeed.bind(this);
@@ -14,12 +12,10 @@ export default class StartModal {
             speedButtons[i].addEventListener('click', (e) => {
                 const allSpeedButtons = document.querySelectorAll('[data-wpm]');
                 for (let j = 0; j < allSpeedButtons.length; j++) {
-                    debugger;
+              
                     allSpeedButtons[j].setAttribute('class', 'speed');
                 }
-                debugger;
                 e.currentTarget.setAttribute('class', 'selected-speed');
-                debugger;
                 startButton.dataset.selectedwpm = e.currentTarget.dataset.wpm;
             })
         }
@@ -38,10 +34,8 @@ export default class StartModal {
                 document.querySelector('.field-error').style.display = 'unset';
             }
             if (Number.isInteger(selectedWPM) && inputFieldValue.length > 1) {     
-                fetch(`../../functions/loadText?topic=${topic}&selectedWPM=${selectedWPM}`, {
-                    
-                });       
-                loadText(inputFieldValue, selectedWPM);
+                fetch(`../../functions/loadText?topic=${topic}&selectedWPM=${selectedWPM}`, {});       
+                // loadText(inputFieldValue, selectedWPM);
             }
         });
     }

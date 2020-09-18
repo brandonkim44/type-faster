@@ -141,7 +141,6 @@ class Text {
     }
 
     calcWPM(totalTypedCount, uncorrectedErrorCount) {
-        debugger;
         let netWPM = 0;
         let uncorrectedChars = document.querySelectorAll('[data-incorrect]');
         if (uncorrectedChars) { uncorrectedErrorCount = document.querySelectorAll('[data-incorrect]').length; };

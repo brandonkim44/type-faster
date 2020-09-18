@@ -24,7 +24,6 @@ export default class Timer {
         
         if (!this.stopped) {
             let newTime = (new Date()).getTime();
-            debugger;
             let totalTimePassed = this.offset + (newTime - this.startTime);
             
             secs = parseInt(totalTimePassed / 1000);
