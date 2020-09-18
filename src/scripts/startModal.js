@@ -37,7 +37,10 @@ export default class StartModal {
             if (inputFieldValue.length <= 1) {
                 document.querySelector('.field-error').style.display = 'unset';
             }
-            if (Number.isInteger(selectedWPM) && inputFieldValue.length > 1) {             
+            if (Number.isInteger(selectedWPM) && inputFieldValue.length > 1) {     
+                fetch(`../../functions/loadText?topic=${topic}&selectedWPM=${selectedWPM}`, {
+                    
+                });       
                 loadText(inputFieldValue, selectedWPM);
             }
         });

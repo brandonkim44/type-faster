@@ -4,3 +4,6 @@
 /config.js
 /dist/main.js
 /dist/main.js.map
+
+# Local Netlify folder
+.netlify
