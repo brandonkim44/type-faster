@@ -1,6 +1,6 @@
 /node_modules/
 /.DS_Store
 /readme_wireframe/.DS_Store
-/config.js
-/dist/main.js
-/dist/main.js.map
+
+# Local Netlify folder
+.netlify

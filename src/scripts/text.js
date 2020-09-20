@@ -1,4 +1,4 @@
-class Text {
+export default class Text {
     constructor(responseText, timer) {
         this.timer = timer;
         this.moveDivInterval = null;
@@ -141,7 +141,6 @@ class Text {
     }
 
     calcWPM(totalTypedCount, uncorrectedErrorCount) {
-        debugger;
         let netWPM = 0;
         let uncorrectedChars = document.querySelectorAll('[data-incorrect]');
         if (uncorrectedChars) { uncorrectedErrorCount = document.querySelectorAll('[data-incorrect]').length; };
@@ -197,5 +196,3 @@ class Text {
         return false;
     }
 }
-
-export default Text;
