@@ -48,7 +48,6 @@ export default class StartModal {
                         if (article) {
                           const articleURL = article.url;
                           const lexperAPIURL = `https://lexper.p.rapidapi.com/v1.1/extract?media=1&url=${articleURL}`;
-                          console.log(lexperAPIURL);
                           return fetch(`../../.netlify/functions/extractArticle?url=${encodeURIComponent(lexperAPIURL)}`, {})
                         } else {
                             if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); };
@@ -60,7 +59,6 @@ export default class StartModal {
                     })
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data)
                         const author = data.article.author;
                         const title = data.article.title;
                         const text = data.article.text;
