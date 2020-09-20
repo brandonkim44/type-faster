@@ -1,4 +1,4 @@
-class Text {
+export default class Text {
     constructor(responseText, timer) {
         this.timer = timer;
         this.moveDivInterval = null;
@@ -196,5 +196,3 @@ class Text {
         return false;
     }
 }
-
-export default Text;

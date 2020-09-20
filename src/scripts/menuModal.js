@@ -42,4 +42,4 @@ export default class MenuModal {
             window.location.reload();
         });
     }
-}
+};
