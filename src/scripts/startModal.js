@@ -40,9 +40,7 @@ export default class StartModal {
 
                 fetch(`../../.netlify/functions/loadText?topic=${inputFieldValue}&selectedWPM=${selectedWPM}`, {})
                     .then(handleErrors)
-                    .then((res) => {
-                        console.log(res);
-                        return res.json()})
+                    .then((res) => res.json())
                     .then((data) => {
                         const numOfArticles = data.articles.length;
                         const randomArticleNum = Math.floor(Math.random() * numOfArticles + 1);
@@ -55,13 +53,9 @@ export default class StartModal {
                           return fetch(`../../.netlify/functions/extractArticle?url=${encodeURIComponent(lexperAPIURL)}`, {})
                     })
                     .then(handleErrors)
-                    .then((res) => {
-                        console.log(res);
-                        return res.json()
-                    })
-                    .then(handleErrors)
+                    .then((res) => res.json())
+                    .then(handleExtractAPIErr)
                     .then((data) => {
-                        console.log(data);
                         const author = data.article.author;
                         const title = data.article.title;
                         const text = data.article.text;
@@ -83,17 +77,21 @@ export default class StartModal {
 }
 
 function handleErrors(response) {
-    console.log(response);
     if (!response.ok) {
         if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); };
         let statusMessage = response.statusText;
         alert('API Request Failed. Please try again!');
         throw Error(statusMessage);
-    } else if (response.errors) {
+    }
+    return response;
+};
+
+function handleExtractAPIErr(response) {
+    if (response.errors) {
         if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); };
         let statusMessage = response.message;
         alert('API Request Failed. Please try again!');
         throw Error(statusMessage);
     }
     return response;
-};
+}
