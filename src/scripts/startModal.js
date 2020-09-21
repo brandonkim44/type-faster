@@ -39,26 +39,29 @@ export default class StartModal {
                 document.querySelector('.waiting-comic').style.display = 'unset';
 
                 fetch(`../../.netlify/functions/loadText?topic=${inputFieldValue}&selectedWPM=${selectedWPM}`, {})
-                    .then((res) => res.json())
+                    .then(handleErrors)
+                    .then((res) => {
+                        console.log(res);
+                        return res.json()})
                     .then((data) => {
                         const numOfArticles = data.articles.length;
                         const randomArticleNum = Math.floor(Math.random() * numOfArticles + 1);
                         const article = data.articles[randomArticleNum]; 
-
+                        let articleURL = '';
                         if (article) {
-                          const articleURL = article.url;
+                            articleURL = article.url;
+                        }
                           const lexperAPIURL = `https://lexper.p.rapidapi.com/v1.1/extract?media=1&url=${articleURL}`;
                           return fetch(`../../.netlify/functions/extractArticle?url=${encodeURIComponent(lexperAPIURL)}`, {})
-                        } else {
-                            if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); };
-                            return {
-                                statusCode: 500,
-                                body: "API Request Failed"
-                            }
-                        }
                     })
-                    .then((res) => res.json())
+                    .then(handleErrors)
+                    .then((res) => {
+                        console.log(res);
+                        return res.json()
+                    })
+                    .then(handleErrors)
                     .then((data) => {
+                        console.log(data);
                         const author = data.article.author;
                         const title = data.article.title;
                         const text = data.article.text;
@@ -74,8 +77,23 @@ export default class StartModal {
                         const game = new Game(text, selectedWPM);
                         if (document.querySelector(".splash-bg")) { document.querySelector(".splash-bg").setAttribute("class", "hidden-splash-bg");}
                     })
-                // loadText(inputFieldValue, selectedWPM);
             }
         });
     }
 }
+
+function handleErrors(response) {
+    console.log(response);
+    if (!response.ok) {
+        if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); };
+        let statusMessage = response.statusText;
+        alert('API Request Failed. Please try again!');
+        throw Error(statusMessage);
+    } else if (response.errors) {
+        if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); };
+        let statusMessage = response.message;
+        alert('API Request Failed. Please try again!');
+        throw Error(statusMessage);
+    }
+    return response;
+};

@@ -6,7 +6,6 @@ exports.handler = async (event, context, callback) => {
         body: JSON.stringify(body)
     })}
     let topic = event.queryStringParameters.topic;
-    let selectedWPM = event.queryStringParameters.selectedWPM;
     let lastWeeksDate = getLastWeeksDate();
     let url =
       "https://gnews.io/api/v4/search?" +
@@ -37,13 +36,3 @@ function getLastWeeksDate() {
         lastWeek = lastWeek.toISOString();
     return lastWeek;
 };
-
-// function handleErrors(response) {
-//     if (!response.ok) {
-//         if (document.querySelector('.splash-bg')) { document.querySelector('.splash-bg').setAttribute('class', 'hidden-splash-bg'); };
-//         let statusMessage = response.statusText;
-//         alert('API Request Failed. Please try again!');
-//         throw Error(statusMessage);
-//     }
-//     return response;
-// };
