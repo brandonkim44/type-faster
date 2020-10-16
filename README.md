@@ -10,7 +10,7 @@ Type Faster is a simple JavaScript game that allows you to:
 ## Table of Content
 
 ### [Article Fetching](#article-fetching)
-### [Hiding API_Keys](#hiding-api-keys)
+### [Hiding API Keys](#hiding-api-keys)
 
 ## 1. Article Fetching
 After you enter a word (a "topic") you'd like to learn about and click submit, a splash modal is made visible and covers the entire page. The value of the input field is fed into the body of an asynchronous request to a Google News API. The GNews API will return a collection of various articles related to the word from the past couple weeks, and one of the articles is selected at random. Because free news APIs don't allow for free access to the full text of articles, I then fed the returned data of the promise (the randomly selected article) and fed the URL of the article as a parameter into the body of another asynchronous request to an Article Data Extractor API (lexper API), which then extracts the text body from the article. 
