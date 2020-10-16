@@ -13,9 +13,11 @@ Type Faster is a simple JavaScript game that allows you to:
 ### [Hiding API Keys](#hiding-api-keys)
 
 ## 1. Article Fetching
-After you enter a word (a "topic") you'd like to learn about and click submit, a splash modal is made visible and covers the entire page. The value of the input field is fed into the body of an asynchronous request to a Google News API. The GNews API will return a collection of various articles related to the word from the past couple weeks, and one of the articles is selected at random. Because free news APIs don't allow for free access to the full text of articles, I then fed the returned data of the promise (the randomly selected article) and fed the URL of the article as a parameter into the body of another asynchronous request to an Article Data Extractor API (lexper API), which then extracts the text body from the article. 
+After you enter a word (a "topic") you'd like to learn about and click submit, a splash modal is made visible and covers the entire page. The value of the input field is fed into the body of an asynchronous request to a Google News API. The GNews API will return a collection of various articles related to the word from the past couple weeks, and one of the articles is selected at random. 
 
-Once the second promise is resolved and successful, the splash modal is turned off and the game begins. There is a handleError function that checks to see if any promises resolve as errors, at which point, an alert is made that the API request failed and the you can retry.
+Because free news APIs don't allow for free access to the full text of articles, I then fed the returned data of the promise (the randomly selected article) and fed the URL of the article as a parameter into the body of another asynchronous request to an Article Data Extractor API (lexper API), which then extracts the text body from the article. 
+
+Once the second promise is resolved and successful, the splash modal is turned off and the game begins. There is also a function that handles errors, checking to see if any promises resolve as errors, at which point, an alert is made that the API request failed and then you can retry.
 
 ## 2. Hiding API Keys
 I attempted to hide the API keys with various environment variables and github secret keys for the APIs used in this project, however, they would reappear in the raw "index.js" file after webpack bundled up all of the files and dependencies
